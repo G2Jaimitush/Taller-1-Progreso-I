@@ -4,82 +4,54 @@ public class Fecha {
     private int mes;
     private int dia;
 
-    /**Creacion de Constructor*/
-    public Fecha() {
-    }
-
-    /**Metodos propios de Java*/
+    /**Constructores*/
+    public Fecha() {}
     public Fecha(int year, int mes, int dia) {
         this.year = year;
         this.mes = mes;
         this.dia = dia;
     }
 
+    /**Getters y Setters*/
+    public int getYear() { return year; }
+    public void setYear(int year) { this.year = year; }
+    public int getMes() { return mes; }
+    public void setMes(int mes) { this.mes = mes; }
+    public int getDia() { return dia; }
+    public void setDia(int dia) { this.dia = dia; }
 
-    public int getYear() {
-        return year;
-    }
+    /**Validaciones con retorno 1 = error, 0 = correcto*/
 
-    public void setYear(int year) {
-        this.year = year;
-    }
-
-    public int getMes() {
-        return mes;
-    }
-
-    public void setMes(int mes) {
-        this.mes = mes;
-    }
-
-    public int getDia() {
-        return dia;
-    }
-
-    public void setDia(int dia) {
-        this.dia = dia;
-    }
-
-    /**Metodos Propios*/
-    public void ValidacionAño (int year){
-
-        if (this.year < 2025){
-            System.out.println("No se puede ingresar un year menor al year existente");
+    public int ValidacionAño(int year) {
+        if (year < 2025) {
+            return 1; // Error
         }
-
+        return 0; // Correcto
     }
-    public void ValidacionMes (int mes){
-        if (mes < 1 || mes >12){
-            System.out.println("No se puede ingresar meses fuera del rango");
+
+    public int ValidacionMes(int mes) {
+        if (mes < 1 || mes > 12) {
+            return 1; // Error
         }
-
+        return 0; // Correcto
     }
 
-    public Integer ValidacionDia (int dia) {
+    public int ValidacionDia(int dia) {
         if (dia < 1 || dia > 31) {
-            System.out.println("No se puede ingresar días fuera del rango");
             return 1;
         }
         if ((year % 4 == 0 && year % 100 != 0) || (year % 400 == 0)) {
-            if (mes == 2 && dia>29 ) {
-                System.out.println("El año " + year + " es bisiesto, febrero  tiene 29 días");
+            if (mes == 2 && dia > 29) {
                 return 1;
             }
-
-        }
-        if (mes == 2 && dia>28) {
-            System.out.println("El año " + year + " no es bisiesto, febrero  tiene 28 días");
+        } else if (mes == 2 && dia > 28) {
             return 1;
-        }else{
-            return 0;
         }
+        return 0;
     }
 
-
-
-
-    public String toString(){
-        return  "" + dia + " / " + mes + " / " + year;
+    /**Mostrar la fecha*/
+    public String toString() {
+        return dia + " / " + mes + " / " + year;
     }
-
 }
